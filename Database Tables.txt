@@ -1,0 +1,83 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 97
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database previous_chalk_3282;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use previous_chalk_3282;
+Database changed
+mysql> create table vendor(vid varchar(15) primary key,password varchar(20),vname varchar(30),vmob varchar(12),vemail varchar(40),company varchar(15),address varchar(100));
+Query OK, 0 rows affected (0.15 sec)
+
+mysql> desc vendor;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| vid      | varchar(15)  | NO   | PRI | NULL    |       |
+| password | varchar(20)  | YES  |     | NULL    |       |
+| vname    | varchar(30)  | YES  |     | NULL    |       |
+| vmob     | varchar(12)  | YES  |     | NULL    |       |
+| vemail   | varchar(40)  | YES  |     | NULL    |       |
+| company  | varchar(15)  | YES  |     | NULL    |       |
+| address  | varchar(100) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+7 rows in set (0.04 sec)
+
+mysql> create table tender(tid varchar(15) primary key,tname varchar(40),ttype varchar(20),tprice int, tdesc varchar(300),tdeadline date,tloc varchar(70));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc tendor;
+ERROR 1146 (42S02): Table 'previous_chalk_3282.tendor' doesn't exist
+mysql> desc tender;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| tid       | varchar(15)  | NO   | PRI | NULL    |       |
+| tname     | varchar(40)  | YES  |     | NULL    |       |
+| ttype     | varchar(20)  | YES  |     | NULL    |       |
+| tprice    | int          | YES  |     | NULL    |       |
+| tdesc     | varchar(300) | YES  |     | NULL    |       |
+| tdeadline | date         | YES  |     | NULL    |       |
+| tloc      | varchar(70)  | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> create table bidder (bid varchar(15) primary key,vid varchar(15) references vendor(vid),tid varchar(15) references tender(tid),bidamount int,deadline date,status varchar(10));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc bidder;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| bid       | varchar(15) | NO   | PRI | NULL    |       |
+| vid       | varchar(15) | YES  |     | NULL    |       |
+| tid       | varchar(15) | YES  |     | NULL    |       |
+| bidamount | int         | YES  |     | NULL    |       |
+| deadline  | date        | YES  |     | NULL    |       |
+| status    | varchar(10) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table tenderstatus(tid varchar(15) primary key references tender(tid),bid varchar(15) references bidder(bid),status varchar(15) not null,vid varchar(15) references vendor(vid));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc tenderstatus;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| tid    | varchar(15) | NO   | PRI | NULL    |       |
+| bid    | varchar(15) | YES  |     | NULL    |       |
+| status | varchar(15) | NO   |     | NULL    |       |
+| vid    | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
