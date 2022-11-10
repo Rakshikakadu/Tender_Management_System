@@ -1,10 +1,3 @@
-Enter password: ****
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 97
-Server version: 8.0.31 MySQL Community Server - GPL
-
-Copyright (c) 2000, 2022, Oracle and/or its affiliates.
-
 Oracle is a registered trademark of Oracle Corporation and/or its
 affiliates. Other names may be trademarks of their respective
 owners.
@@ -12,72 +5,111 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> create database previous_chalk_3282;
-Query OK, 1 row affected (0.09 sec)
+Query OK, 1 row affected (0.02 sec)
 
 mysql> use previous_chalk_3282;
 Database changed
-mysql> create table vendor(vid varchar(15) primary key,password varchar(20),vname varchar(30),vmob varchar(12),vemail varchar(40),company varchar(15),address varchar(100));
-Query OK, 0 rows affected (0.15 sec)
+mysql> create table vendor(vendorId int primary key auto_increment,vendorPassword varchar(20),vendorName varchar(30),
+    -> vendorMob varchar(12),vendorEmail varchar(40),vendorCompany varchar(15),vendorAddress varchar(100));
+Query OK, 0 rows affected (0.04 sec)
 
 mysql> desc vendor;
-+----------+--------------+------+-----+---------+-------+
-| Field    | Type         | Null | Key | Default | Extra |
-+----------+--------------+------+-----+---------+-------+
-| vid      | varchar(15)  | NO   | PRI | NULL    |       |
-| password | varchar(20)  | YES  |     | NULL    |       |
-| vname    | varchar(30)  | YES  |     | NULL    |       |
-| vmob     | varchar(12)  | YES  |     | NULL    |       |
-| vemail   | varchar(40)  | YES  |     | NULL    |       |
-| company  | varchar(15)  | YES  |     | NULL    |       |
-| address  | varchar(100) | YES  |     | NULL    |       |
-+----------+--------------+------+-----+---------+-------+
-7 rows in set (0.04 sec)
-
-mysql> create table tender(tid varchar(15) primary key,tname varchar(40),ttype varchar(20),tprice int, tdesc varchar(300),tdeadline date,tloc varchar(70));
-Query OK, 0 rows affected (0.03 sec)
-
-mysql> desc tendor;
-ERROR 1146 (42S02): Table 'previous_chalk_3282.tendor' doesn't exist
-mysql> desc tender;
-+-----------+--------------+------+-----+---------+-------+
-| Field     | Type         | Null | Key | Default | Extra |
-+-----------+--------------+------+-----+---------+-------+
-| tid       | varchar(15)  | NO   | PRI | NULL    |       |
-| tname     | varchar(40)  | YES  |     | NULL    |       |
-| ttype     | varchar(20)  | YES  |     | NULL    |       |
-| tprice    | int          | YES  |     | NULL    |       |
-| tdesc     | varchar(300) | YES  |     | NULL    |       |
-| tdeadline | date         | YES  |     | NULL    |       |
-| tloc      | varchar(70)  | YES  |     | NULL    |       |
-+-----------+--------------+------+-----+---------+-------+
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| vendorId       | int          | NO   | PRI | NULL    | auto_increment |
+| vendorPassword | varchar(20)  | YES  |     | NULL    |                |
+| vendorName     | varchar(30)  | YES  |     | NULL    |                |
+| vendorMob      | varchar(12)  | YES  |     | NULL    |                |
+| vendorEmail    | varchar(40)  | YES  |     | NULL    |                |
+| vendorCompany  | varchar(15)  | YES  |     | NULL    |                |
+| vendorAddress  | varchar(100) | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
 7 rows in set (0.01 sec)
 
-mysql> create table bidder (bid varchar(15) primary key,vid varchar(15) references vendor(vid),tid varchar(15) references tender(tid),bidamount int,deadline date,status varchar(10));
-Query OK, 0 rows affected (0.05 sec)
+mysql> create table tender(tendorId int primary key auto_increment,tendorName varchar(40),tendorType varchar(20),
+    ->  tendorPrice int, tendorDesc varchar(300),tendorDeadline date,tendorLocation varchar(70));
+Query OK, 0 rows affected (0.02 sec)
+
+
+mysql> desc tender;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| tendorId       | int          | NO   | PRI | NULL    | auto_increment |
+| tendorName     | varchar(40)  | YES  |     | NULL    |                |
+| tendorType     | varchar(20)  | YES  |     | NULL    |                |
+| tendorPrice    | int          | YES  |     | NULL    |                |
+| tendorDesc     | varchar(300) | YES  |     | NULL    |                |
+| tendorDeadline | date         | YES  |     | NULL    |                |
+| tendorLocation | varchar(70)  | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> create table bidder (bidderId int primary key auto_increment,vendorId int references vendor(vendorId),
+    -> tendorId int references tendor(tendorId),bidamount int,Bidderdeadline date,status varchar(10));
+Query OK, 0 rows affected (0.03 sec)
 
 mysql> desc bidder;
-+-----------+-------------+------+-----+---------+-------+
-| Field     | Type        | Null | Key | Default | Extra |
-+-----------+-------------+------+-----+---------+-------+
-| bid       | varchar(15) | NO   | PRI | NULL    |       |
-| vid       | varchar(15) | YES  |     | NULL    |       |
-| tid       | varchar(15) | YES  |     | NULL    |       |
-| bidamount | int         | YES  |     | NULL    |       |
-| deadline  | date        | YES  |     | NULL    |       |
-| status    | varchar(10) | YES  |     | NULL    |       |
-+-----------+-------------+------+-----+---------+-------+
++----------------+-------------+------+-----+---------+----------------+
+| Field          | Type        | Null | Key | Default | Extra          |
++----------------+-------------+------+-----+---------+----------------+
+| bidderId       | int         | NO   | PRI | NULL    | auto_increment |
+| vendorId       | int         | YES  |     | NULL    |                |
+| tendorId       | int         | YES  |     | NULL    |                |
+| bidamount      | int         | YES  |     | NULL    |                |
+| Bidderdeadline | date        | YES  |     | NULL    |                |
+| status         | varchar(10) | YES  |     | NULL    |                |
++----------------+-------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
 
-mysql> create table tenderstatus(tid varchar(15) primary key references tender(tid),bid varchar(15) references bidder(bid),status varchar(15) not null,vid varchar(15) references vendor(vid));
+mysql> create table tenderstatus(tsTendorId int primary key references tender(tendorId),tsBidderId int references bidder(bidderId),
+    ->      status varchar(15) not null,tsVendorId int references vendor(vendorId));
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> desc tenderstatus;
-+--------+-------------+------+-----+---------+-------+
-| Field  | Type        | Null | Key | Default | Extra |
-+--------+-------------+------+-----+---------+-------+
-| tid    | varchar(15) | NO   | PRI | NULL    |       |
-| bid    | varchar(15) | YES  |     | NULL    |       |
-| status | varchar(15) | NO   |     | NULL    |       |
-| vid    | varchar(15) | YES  |     | NULL    |       |
-+--------+-------------+------+-----+---------+-------+
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| tsTendorId | int         | NO   | PRI | NULL    |       |
+| tsBidderId | int         | YES  |     | NULL    |       |
+| status     | varchar(15) | NO   |     | NULL    |       |
+| tsVendorId | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
 4 rows in set (0.00 sec)
+
+
+mysql> create table administrator(adminId int primary key auto_increment,adminUserName varchar(12) not null unique ,adminEmail varchar(15) not null,adminPassword varchar(8) not null);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc administrator;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| adminId       | int         | NO   | PRI | NULL    | auto_increment |
+| adminUserName | varchar(12) | NO   | UNI | NULL    |                |
+| adminEmail    | varchar(15) | NO   |     | NULL    |                |
+| adminPassword | varchar(8)  | NO   |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+
+mysql> insert into administrator(adminUserName,adminEmail,adminPassword) values('Rakshika','rk@gmail.com','rakshu12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into administrator(adminUserName,adminEmail,adminPassword) values('Abhishek','ab@gmail.com','abhi123');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into administrator(adminUserName,adminEmail,adminPassword) values('Padmanabh','pd@gmail.com','padma');
+Query OK, 1 row affected (0.00 sec)
+
+
+mysql> select * from administrator;
++---------+---------------+--------------+---------------+
+| adminId | adminUserName | adminEmail   | adminPassword |
++---------+---------------+--------------+---------------+
+|       1 | Rakshika      | rk@gmail.com | rakshu12      |
+|       2 | Abhishek      | ab@gmail.com | abhi123       |
+|       3 | Padmanabh     | pd@gmail.com | padma         |
++---------+---------------+--------------+---------------+
+3 rows in set (0.00 sec)
