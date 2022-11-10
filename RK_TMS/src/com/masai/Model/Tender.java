@@ -1,5 +1,6 @@
 package com.masai.Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Tender {
@@ -9,16 +10,16 @@ public class Tender {
 	private String ttype;
 	private int tprice;
 	private String tdesc;
-	private LocalDate tdeadline;
+	private String tdeadline;
 	private String tloc;
 	
 	public Tender() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tender(int tid, String tname, String ttype, int tprice, String tdesc, LocalDate tdeadline, String tloc) {
+	public Tender( String tname, String ttype, int tprice, String tdesc, String tdeadline, String tloc) {
 		super();
-		this.tid = tid;
+		
 		this.tname = tname;
 		this.ttype = ttype;
 		this.tprice = tprice;
@@ -67,11 +68,11 @@ public class Tender {
 		this.tdesc = tdesc;
 	}
 
-	public LocalDate getTdeadline() {
+	public String getTdeadline() {
 		return tdeadline;
 	}
 
-	public void setTdeadline(LocalDate tdeadline) {
+	public void setTdeadline(String tdeadline) {
 		this.tdeadline = tdeadline;
 	}
 

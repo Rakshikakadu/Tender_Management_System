@@ -8,16 +8,16 @@ public class Bidder {
 	private int vendorId;
 	private int tendorId;
 	private int bidAmount;
-	private LocalDate bidderDeadline;
+	private String bidderDeadline;
 	private String status;
 	
 	public Bidder() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Bidder(int bidderId, int vendorId, int tendorId, int bidAmount, LocalDate bidderDeadline, String status) {
+	public Bidder( int vendorId, int tendorId, int bidAmount, String bidderDeadline, String status) {
 		super();
-		this.bidderId = bidderId;
+		
 		this.vendorId = vendorId;
 		this.tendorId = tendorId;
 		this.bidAmount = bidAmount;
@@ -57,11 +57,11 @@ public class Bidder {
 		this.bidAmount = bidAmount;
 	}
 
-	public LocalDate getBidderDeadline() {
+	public String getBidderDeadline() {
 		return bidderDeadline;
 	}
 
-	public void setBidderDeadline(LocalDate bidderDeadline) {
+	public void setBidderDeadline(String bidderDeadline) {
 		this.bidderDeadline = bidderDeadline;
 	}
 

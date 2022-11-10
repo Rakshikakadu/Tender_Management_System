@@ -28,7 +28,7 @@ mysql> desc vendor;
 7 rows in set (0.01 sec)
 
 mysql> create table tender(tendorId int primary key auto_increment,tendorName varchar(40),tendorType varchar(20),
-    ->  tendorPrice int, tendorDesc varchar(300),tendorDeadline date,tendorLocation varchar(70));
+    ->  tendorPrice int, tendorDesc varchar(300),tendorDeadline varchar(10),tendorLocation varchar(70));
 Query OK, 0 rows affected (0.02 sec)
 
 
@@ -41,8 +41,8 @@ mysql> desc tender;
 | tendorType     | varchar(20)  | YES  |     | NULL    |                |
 | tendorPrice    | int          | YES  |     | NULL    |                |
 | tendorDesc     | varchar(300) | YES  |     | NULL    |                |
-| tendorDeadline | date         | YES  |     | NULL    |                |
 | tendorLocation | varchar(70)  | YES  |     | NULL    |                |
+| tendorDeadline | varchar(10)  | YES  |     | NULL    |                |
 +----------------+--------------+------+-----+---------+----------------+
 7 rows in set (0.00 sec)
 
@@ -58,8 +58,8 @@ mysql> desc bidder;
 | vendorId       | int         | YES  |     | NULL    |                |
 | tendorId       | int         | YES  |     | NULL    |                |
 | bidamount      | int         | YES  |     | NULL    |                |
-| Bidderdeadline | date        | YES  |     | NULL    |                |
 | status         | varchar(10) | YES  |     | NULL    |                |
+| Bidderdeadline | varchar(10) | YES  |     | NULL    |                |
 +----------------+-------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
 

@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.masai.Exception.AdminException;
+import com.masai.Exception.TendorException;
 import com.masai.Exception.VendorException;
+import com.masai.Model.Tender;
 import com.masai.Model.Vendor;
 import com.masai.Utility.DBUtill;
 
@@ -90,7 +92,7 @@ public class AdministratorDaoImpl implements AdministratorDao{
 			}
 			
 			if(vendors.size()==0) {
-				throw new VendorException("Vendor list is empty");
+				throw new VendorException("Vendor list is empty!....");
 			}
 			
 		} catch (SQLException e) {
@@ -98,6 +100,62 @@ public class AdministratorDaoImpl implements AdministratorDao{
 		}
 		
 		return vendors;
+	}
+
+	@Override
+	public String addNewTenders(Tender tender) throws TendorException {
+		
+		String str = "Tender details is not inserted";
+		
+		try (Connection con = DBUtill.provideConnection()){
+			
+			PreparedStatement ps =  con.prepareStatement("insert into tender(tendorName,tendorType,tendorPrice,tendorDesc,tendorLocation,tendorDeadline) values(?,?,?,?,?,?)");
+			
+			ps.setString(1, tender.getTname());
+			ps.setString(2, tender.getTtype());
+			ps.setInt(3, tender.getTprice());
+			ps.setString(4, tender.getTdesc());
+			ps.setString(5, tender.getTloc());
+			ps.setString(6, tender.getTdeadline());
+			int x = ps.executeUpdate();
+			
+			
+			if(x>0) {
+				str = "Tender details is inserted";
+			}else {
+				throw new TendorException("Tendor not found");
+			}
+			
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+		
+		return str;
+	}
+
+	@Override
+	public List<Tender> getAllTenderDetails() throws TendorException{
+		List<Tender> tendors = new ArrayList<>();
+		
+		try (Connection con = DBUtill.provideConnection()){
+			
+			PreparedStatement ps =  con.prepareStatement("select * from tender");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				tendors.add(new Tender(rs.getString("tendorName"),rs.getString("tendorType"), rs.getInt("tendorPrice"),rs.getString("tendorDesc"),rs.getString("tendorLocation"),rs.getString("tendorDeadline")));
+			}
+			
+			if(tendors.size()==0) {
+				throw new TendorException("Tendor list is empty!....");
+			}
+			
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+		
+		return tendors;
 	}
 
 	
