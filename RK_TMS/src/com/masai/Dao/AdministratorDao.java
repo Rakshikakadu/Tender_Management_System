@@ -3,8 +3,10 @@ package com.masai.Dao;
 import java.util.List;
 
 import com.masai.Exception.AdminException;
+import com.masai.Exception.BidderException;
 import com.masai.Exception.TendorException;
 import com.masai.Exception.VendorException;
+import com.masai.Model.Bidder;
 import com.masai.Model.Tender;
 import com.masai.Model.Vendor;
 
@@ -19,4 +21,8 @@ public interface AdministratorDao {
 	public String addNewTenders(Tender tender)throws TendorException;
 	
 	public List<Tender> getAllTenderDetails()throws TendorException;
+	
+	public List<Bidder> getAllBidsOfTender(int tenderId)throws BidderException;
+	
+	public String assignTendorToVendor(int tendorId,int vendorId)throws TendorException , VendorException;
 }

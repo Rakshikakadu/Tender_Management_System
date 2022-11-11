@@ -28,23 +28,23 @@ mysql> desc vendor;
 7 rows in set (0.01 sec)
 
 mysql> create table tender(tendorId int primary key auto_increment,tendorName varchar(40),tendorType varchar(20),
-    ->  tendorPrice int, tendorDesc varchar(300),tendorDeadline varchar(10),tendorLocation varchar(70));
+    tendorPrice int, tendorDesc varchar(300),tendorDeadline varchar(10),tendorLocation varchar(70),status varchar(10) default 'Not_Assigned');
 Query OK, 0 rows affected (0.02 sec)
 
 
 mysql> desc tender;
-+----------------+--------------+------+-----+---------+----------------+
-| Field          | Type         | Null | Key | Default | Extra          |
-+----------------+--------------+------+-----+---------+----------------+
-| tendorId       | int          | NO   | PRI | NULL    | auto_increment |
-| tendorName     | varchar(40)  | YES  |     | NULL    |                |
-| tendorType     | varchar(20)  | YES  |     | NULL    |                |
-| tendorPrice    | int          | YES  |     | NULL    |                |
-| tendorDesc     | varchar(300) | YES  |     | NULL    |                |
-| tendorLocation | varchar(70)  | YES  |     | NULL    |                |
-| tendorDeadline | varchar(10)  | YES  |     | NULL    |                |
-+----------------+--------------+------+-----+---------+----------------+
-7 rows in set (0.00 sec)
++----------------+--------------+------+-----+--------------+----------------+
+| Field          | Type         | Null | Key | Default      | Extra          |
++----------------+--------------+------+-----+--------------+----------------+
+| tendorId       | int          | NO   | PRI | NULL         | auto_increment |
+| tendorName     | varchar(40)  | YES  |     | NULL         |                |
+| tendorType     | varchar(20)  | YES  |     | NULL         |                |
+| tendorPrice    | int          | YES  |     | NULL         |                |
+| tendorDesc     | varchar(300) | YES  |     | NULL         |                |
+| tendorDeadline | varchar(10)  | YES  |     | NULL         |                |
+| tendorLocation | varchar(70)  | YES  |     | NULL         |                |
+| status         | varchar(30)  | YES  |     | Not_Assigned |                |
++----------------+--------------+------+-----+--------------+----------------+
 
 mysql> create table bidder (bidderId int primary key auto_increment,vendorId int references vendor(vendorId),
     -> tendorId int references tendor(tendorId),bidamount int,Bidderdeadline date,status varchar(10));
@@ -63,17 +63,20 @@ mysql> desc bidder;
 +----------------+-------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
 
-mysql> create table tenderstatus(tsTendorId int primary key references tender(tendorId),tsBidderId int references bidder(bidderId),
-    ->      status varchar(15) not null,tsVendorId int references vendor(vendorId));
+mysql> create table tenderstatus(status varchar(15) not null,
+				tsTendorId int references tender(tendorId),
+				tsBidderId int references bidder(bidderId),
+      			        tsVendorId int references vendor(vendorId)
+	);
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> desc tenderstatus;
 +------------+-------------+------+-----+---------+-------+
 | Field      | Type        | Null | Key | Default | Extra |
 +------------+-------------+------+-----+---------+-------+
-| tsTendorId | int         | NO   | PRI | NULL    |       |
-| tsBidderId | int         | YES  |     | NULL    |       |
 | status     | varchar(15) | NO   |     | NULL    |       |
+| tsTendorId | int         | YES  |     | NULL    |       |
+| tsBidderId | int         | YES  |     | NULL    |       |
 | tsVendorId | int         | YES  |     | NULL    |       |
 +------------+-------------+------+-----+---------+-------+
 4 rows in set (0.00 sec)
