@@ -19,11 +19,14 @@ public class AssignTendorToVendor {
 		System.out.println("Enter vendor id : ");
 		int vid = sc.nextInt();
 		
+		System.out.println("Enter bidder id : ");
+		int bid = sc.nextInt();
+		
 		try {
-			String str =  admin.assignTendorToVendor(tid, vid);
+			String str =  admin.assignTendorToVendor(tid, vid,bid);
 			System.out.println(str);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}

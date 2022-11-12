@@ -1,23 +1,31 @@
 package com.masai.Model;
 
-import java.time.LocalDate;
-
 public class Bidder {
-	
+
 	private int bidderId;
 	private int vendorId;
 	private int tendorId;
 	private int bidAmount;
 	private String bidderDeadline;
 	private String status;
-	
+
 	public Bidder() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Bidder( int vendorId, int tendorId, int bidAmount, String bidderDeadline, String status) {
+	public Bidder(int vendorId, int tendorId, int bidAmount, String bidderDeadline, String status) {
 		super();
-		
+
+		this.vendorId = vendorId;
+		this.tendorId = tendorId;
+		this.bidAmount = bidAmount;
+		this.bidderDeadline = bidderDeadline;
+		this.status = status;
+	}
+
+	public Bidder(int bidderId, int vendorId, int tendorId, int bidAmount, String bidderDeadline, String status) {
+		super();
+		this.bidderId = bidderId;
 		this.vendorId = vendorId;
 		this.tendorId = tendorId;
 		this.bidAmount = bidAmount;
@@ -78,7 +86,5 @@ public class Bidder {
 		return "Bidder [bidderId=" + bidderId + ", vendorId=" + vendorId + ", tendorId=" + tendorId + ", bidAmount="
 				+ bidAmount + ", bidderDeadline=" + bidderDeadline + ", status=" + status + "]";
 	}
-	
-	
-	
+
 }

@@ -22,7 +22,9 @@ public interface AdministratorDao {
 	
 	public List<Tender> getAllTenderDetails()throws TendorException;
 	
+	public List<Bidder> getAllBids()throws BidderException;
+	
 	public List<Bidder> getAllBidsOfTender(int tenderId)throws BidderException;
 	
-	public String assignTendorToVendor(int tendorId,int vendorId)throws TendorException , VendorException;
+	public String assignTendorToVendor(int tendorId,int vendorId,int bidderId)throws TendorException , VendorException, BidderException;
 }

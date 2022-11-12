@@ -11,14 +11,19 @@ import com.masai.Model.Vendor;
 
 public interface VendorDao {
 	
-		public Boolean loginVendor(String userName,String password)throws VendorException;
+		public Vendor loginVendor(String userName,String password)throws VendorException;
 		
 		
 		public List<Tender> getAvailableTendersList()throws TendorException;
+		
+		public String bidAgainstaTender(int tid,int vid,int bidAmt,String biddeadline)throws BidderException,TendorException;
 		
 		public String statusOfBid(int bid) throws BidderException;
 		
 		
 		public List<Bidder> vendorBidHistory(int vid)throws BidderException;
+
+
+		
 	
 }

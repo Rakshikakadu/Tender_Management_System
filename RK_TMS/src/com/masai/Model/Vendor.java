@@ -1,7 +1,7 @@
 package com.masai.Model;
 
 public class Vendor {
-	
+
 	private int vid;
 	private String password;
 	private String vname;
@@ -9,14 +9,25 @@ public class Vendor {
 	private String vemail;
 	private String company;
 	private String address;
-	
+
 	public Vendor() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Vendor(String password, String vname, String vmob, String vemail, String company, String address) {
 		super();
-		
+
+		this.password = password;
+		this.vname = vname;
+		this.vmob = vmob;
+		this.vemail = vemail;
+		this.company = company;
+		this.address = address;
+	}
+
+	public Vendor(int vid, String password, String vname, String vmob, String vemail, String company, String address) {
+		super();
+		this.vid = vid;
 		this.password = password;
 		this.vname = vname;
 		this.vmob = vmob;
@@ -86,6 +97,5 @@ public class Vendor {
 		return "Vendor [vid=" + vid + ", password=" + password + ", vname=" + vname + ", vmob=" + vmob + ", vemail="
 				+ vemail + ", company=" + company + ", address=" + address + "]";
 	}
-	
-	
+
 }

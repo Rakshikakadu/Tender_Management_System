@@ -147,7 +147,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				tendors.add(new Tender(rs.getString("tendorName"), rs.getString("tendorType"), rs.getInt("tendorPrice"),
+				tendors.add(new Tender(rs.getInt("tendorId"),rs.getString("tendorName"), rs.getString("tendorType"), rs.getInt("tendorPrice"),
 						rs.getString("tendorDesc"), rs.getString("tendorLocation"), rs.getString("tendorDeadline")));
 			}
 
@@ -189,7 +189,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 	}
 
 	@Override
-	public String assignTendorToVendor(int tendorId, int vendorId) throws TendorException, VendorException {
+	public String assignTendorToVendor(int tendorId, int vendorId,int bidderId) throws TendorException, VendorException,BidderException {
 		
 		
 		String str="";
@@ -204,14 +204,28 @@ public class AdministratorDaoImpl implements AdministratorDao {
 			if(rs.next()) {
 				 str = "Assigned already...";
 			}else {
-				PreparedStatement ps1 =  con.prepareStatement("insert into tenderstatus(tsTendorId,status,tsVendorId) values(?,'Selected',?)");
+				PreparedStatement ps1 =  con.prepareStatement("insert into tenderstatus(status,tsTendorId,tsBidderId,tsVendorId) values('Selected',?,?,?)");
 				ps1.setInt(1, tendorId);
+				ps1.setInt(2, bidderId);
 				ps1.setInt(2, vendorId);
 				
 				int x = ps.executeUpdate();
 				
 				if(x>0) {
-					str = "Assigned tendor "+tendorId+" to a vendor "+vendorId+"...";
+					
+					
+					PreparedStatement ps2 =  con.prepareStatement("update tender set status = 'Assigned' where tendorId=tendorId");
+					
+					int x2 = ps.executeUpdate();
+					
+					if(x2>0) {
+						str = "Assigned tendor "+tendorId+" to a vendor "+vendorId+"...";
+						PreparedStatement ps3 =  con.prepareStatement("update bidder set status = 'Selected' where tendorId=tendorId And bidderId=bidderId AND vendorId=vendorId");
+						
+						int x3 = ps.executeUpdate();
+						
+					}	
+					
 				}else {
 					throw new TendorException("Tendor is not available");
 					
@@ -225,6 +239,31 @@ public class AdministratorDaoImpl implements AdministratorDao {
 		}
 		
 		return str;
+	}
+
+	@Override
+	public List<Bidder> getAllBids() throws BidderException {
+		List<Bidder> bidders = new ArrayList<>();
+
+		try (Connection con = DBUtill.provideConnection()) {
+
+			PreparedStatement ps = con.prepareStatement("select * from bidder");
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				bidders.add(new Bidder(rs.getInt("bidderId"),rs.getInt("vendorId"), rs.getInt("tendorId"), rs.getInt("bidamount"), rs.getString("status"), rs.getString("Bidderdeadline")));
+			}
+
+			if (bidders.size() == 0) {
+				throw new BidderException("Bidder list is empty!....");
+			}
+
+		} catch (SQLException e) {
+			e.getMessage();
+		}
+
+		return bidders;
 	}
 
 }

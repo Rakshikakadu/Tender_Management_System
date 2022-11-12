@@ -19,7 +19,7 @@ public class GetAvailableTendersList {
 			
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 
 	}

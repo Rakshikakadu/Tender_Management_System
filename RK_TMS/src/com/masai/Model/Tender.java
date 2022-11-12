@@ -27,6 +27,18 @@ public class Tender {
 		this.tdeadline = tdeadline;
 		this.tloc = tloc;
 	}
+	
+
+	public Tender(int tid, String tname, String ttype, int tprice, String tdesc, String tdeadline, String tloc) {
+		super();
+		this.tid = tid;
+		this.tname = tname;
+		this.ttype = ttype;
+		this.tprice = tprice;
+		this.tdesc = tdesc;
+		this.tdeadline = tdeadline;
+		this.tloc = tloc;
+	}
 
 	public int getTid() {
 		return tid;

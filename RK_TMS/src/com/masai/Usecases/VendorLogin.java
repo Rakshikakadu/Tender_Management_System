@@ -6,11 +6,15 @@ import com.masai.Dao.AdministratorDao;
 import com.masai.Dao.AdministratorDaoImpl;
 import com.masai.Dao.VendorDao;
 import com.masai.Dao.VendoreDaoImpl;
+import com.masai.Model.Vendor;
 
 public class VendorLogin {
-
+	
+	private static final String ANSI_RESET = "\u001B[0m";
+	private static final String ANSI_CYAN = "\u001B[36m";
+	
 	public static void main(String[] args) {
-		
+
 		Scanner sc = new Scanner(System.in);
 
 		System.out.println("Enter Vendor Username: ");
@@ -23,21 +27,46 @@ public class VendorLogin {
 
 			VendorDao vendor = new VendoreDaoImpl();
 
-			Boolean vendorIsPresent = vendor.loginVendor(vendorUserName,vendorPassword);
-			
-			if (vendorIsPresent) {
-
+			Vendor vendor1 = vendor.loginVendor(vendorUserName, vendorPassword);
+			System.out.println(vendor1);
+			if (vendor1!=null) {
+				
 				while (true) {
-					System.out.println("");
-					System.out.println("");
-					System.out.println("Enter 10 to Logout");
+					
+					System.out.println();
+					System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**+*+*");
+					System.out.println();
+					
+					
+					System.out.println(ANSI_CYAN + "Press 1 to view all the current Tenders." + ANSI_RESET);
+					System.out.println(ANSI_CYAN +"Press 2 to place a Bid against a Tender." + ANSI_RESET);
+					System.out.println(ANSI_CYAN +"Press 3 to view status of a Bid(Whether Selected or Not)" + ANSI_RESET);
+					System.out.println(ANSI_CYAN +"Press 4 to view his own Bid History." + ANSI_RESET);
+					System.out.println(ANSI_CYAN +"Enter 5 to Logout" + ANSI_RESET);
+					
+					System.out.println();
+					System.out.println("+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**+*+*");
+					System.out.println();
+					
+					
 					int num = sc.nextInt();
 
 					switch (num) {
 
-					
-					case 10: {
-						System.out.println("Logout Succsfull....");
+					case 1:
+						GetAvailableTendersList.main(args);
+						break;
+					case 2:
+						BidAgainstaTender.main(args);
+						break;
+					case 3:
+						StatusOfBid.main(args);
+						break;
+					case 4:
+						VendorBidHistory.main(args);
+						break;
+					case 5: {
+						System.out.println("Vendor "+vendorUserName+" Logout Succsfull....");
 						return;
 					}
 					default:
@@ -50,9 +79,8 @@ public class VendorLogin {
 			}
 
 		} catch (Exception e) {
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
-		System.out.println("Logout Succsfull ****....");
 
 	}
 

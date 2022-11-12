@@ -9,7 +9,7 @@ Query OK, 1 row affected (0.02 sec)
 
 mysql> use previous_chalk_3282;
 Database changed
-mysql> create table vendor(vendorId int primary key auto_increment,vendorPassword varchar(20),vendorName varchar(30),
+mysql> create table vendor(vendorId int primary key auto_increment,vendorPassword varchar(20),vendorName varchar(30) unique not null,
     -> vendorMob varchar(12),vendorEmail varchar(40),vendorCompany varchar(15),vendorAddress varchar(100));
 Query OK, 0 rows affected (0.04 sec)
 
@@ -47,7 +47,7 @@ mysql> desc tender;
 +----------------+--------------+------+-----+--------------+----------------+
 
 mysql> create table bidder (bidderId int primary key auto_increment,vendorId int references vendor(vendorId),
-    -> tendorId int references tendor(tendorId),bidamount int,Bidderdeadline date,status varchar(10));
+    -> tendorId int references tendor(tendorId),bidamount int,Bidderdeadline date,status varchar(20) default 'Pending');
 Query OK, 0 rows affected (0.03 sec)
 
 mysql> desc bidder;
@@ -63,7 +63,7 @@ mysql> desc bidder;
 +----------------+-------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
 
-mysql> create table tenderstatus(status varchar(15) not null,
+mysql> create table tenderstatus(status varchar(15) not null default 'Not_selected',
 				tsTendorId int references tender(tendorId),
 				tsBidderId int references bidder(bidderId),
       			        tsVendorId int references vendor(vendorId)

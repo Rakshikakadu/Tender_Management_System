@@ -42,7 +42,7 @@ public class RegisterVendorDetails {
 			System.out.println(str);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 	}
