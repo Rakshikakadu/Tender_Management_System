@@ -20,6 +20,7 @@ public class GetAllBids {
 		try {
 			
 			List<Bidder> bidders =  admin.getAllBids();
+			System.out.println(bidders);
 			bidders.forEach(b -> System.out.println(ANSI_PURPLE_BACKGROUND
                     +b+ ANSI_RESET));
 			

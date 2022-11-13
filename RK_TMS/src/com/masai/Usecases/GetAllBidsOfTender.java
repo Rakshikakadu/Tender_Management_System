@@ -25,6 +25,7 @@ public class GetAllBidsOfTender {
 		try {
 			
 			List<Bidder> bids =  admin.getAllBidsOfTender(tid);
+			System.out.println(bids);
 			bids.forEach(b -> System.out.println(ANSI_PURPLE_BACKGROUND
                     +b+ ANSI_RESET));
 			

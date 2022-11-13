@@ -65,7 +65,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 			int x = ps.executeUpdate();
 
 			if (x > 0) {
-				str = "Inserted sucessfully...";
+				str = "Vendor details inserted sucessfully...";
 			} else {
 				throw new VendorException("Vendor registration fail...");
 			}
@@ -89,7 +89,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				vendors.add(new Vendor(rs.getString("vendorPassword"), rs.getString("vendorName"),
+				vendors.add(new Vendor(rs.getInt("vendorId"),rs.getString("vendorPassword"), rs.getString("vendorName"),
 						rs.getString("vendorMob"), rs.getString("vendorEmail"), rs.getString("vendorCompany"),
 						rs.getString("vendorAddress")));
 			}
@@ -124,7 +124,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 			int x = ps.executeUpdate();
 
 			if (x > 0) {
-				str = "Tender details is inserted";
+				str = "Tender details is inserted successfully...";
 			} else {
 				throw new TendorException("Tendor not found");
 			}
@@ -169,7 +169,7 @@ public class AdministratorDaoImpl implements AdministratorDao {
 
 		try (Connection con = DBUtill.provideConnection()) {
 
-			PreparedStatement ps = con.prepareStatement("select b from bidder b inner join tender t ON b.tendorId=t.tendorId where t.tendorId=?");
+			PreparedStatement ps = con.prepareStatement("select * from bidder where tendorId=?");
 			ps.setInt(1,tenderId);
 			ResultSet rs = ps.executeQuery();
 
@@ -214,13 +214,16 @@ public class AdministratorDaoImpl implements AdministratorDao {
 				if(x>0) {
 					
 					
-					PreparedStatement ps2 =  con.prepareStatement("update tender set status = 'Assigned' where tendorId=tendorId");
-					
+					PreparedStatement ps2 =  con.prepareStatement("update tender set status = 'Assigned' where tendorId=?");
+					ps2.setInt(1, tendorId);
 					int x2 = ps.executeUpdate();
 					
 					if(x2>0) {
 						str = "Assigned tendor "+tendorId+" to a vendor "+vendorId+"...";
-						PreparedStatement ps3 =  con.prepareStatement("update bidder set status = 'Selected' where tendorId=tendorId And bidderId=bidderId AND vendorId=vendorId");
+						PreparedStatement ps3 =  con.prepareStatement("update bidder set status = 'Selected' where tendorId=? And bidderId=? AND vendorId=?");
+						ps3.setInt(1, tendorId);
+						ps3.setInt(2, bidderId);
+						ps3.setInt(3, vendorId);
 						
 						int x3 = ps.executeUpdate();
 						
