@@ -7,7 +7,11 @@ import com.masai.Dao.VendoreDaoImpl;
 import com.masai.Model.Tender;
 
 public class GetAvailableTendersList {
-
+	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_PURPLE_BACKGROUND
+    = "\u001B[45m";
 	public static void main(String[] args) {
 		
 		VendorDao vendor = new VendoreDaoImpl();
@@ -15,7 +19,8 @@ public class GetAvailableTendersList {
 		try {
 			
 			List<Tender> tendors =	vendor.getAvailableTendersList();
-			tendors.forEach( t -> System.out.println(t));
+			tendors.forEach( t -> System.out.println(ANSI_PURPLE_BACKGROUND
+                    +t + ANSI_RESET));
 			
 			
 		} catch (Exception e) {

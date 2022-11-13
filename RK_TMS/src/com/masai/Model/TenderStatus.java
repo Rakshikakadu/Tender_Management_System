@@ -56,8 +56,8 @@ public class TenderStatus {
 
 	@Override
 	public String toString() {
-		return "TenderStatus [tsTendorId=" + tsTendorId + ", tsBidderId=" + tsBidderId + ", status=" + status
-				+ ", tsVendorId=" + tsVendorId + "]";
+		return "TenderStatus === tsTendorId=" + tsTendorId + ", tsBidderId=" + tsBidderId + ", status=" + status
+				+ ", tsVendorId=" + tsVendorId ;
 	}
 	
 	

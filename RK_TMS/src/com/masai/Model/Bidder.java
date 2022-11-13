@@ -83,8 +83,8 @@ public class Bidder {
 
 	@Override
 	public String toString() {
-		return "Bidder [bidderId=" + bidderId + ", vendorId=" + vendorId + ", tendorId=" + tendorId + ", bidAmount="
-				+ bidAmount + ", bidderDeadline=" + bidderDeadline + ", status=" + status + "]";
+		return "Bidder === bidderId=" + bidderId + ", vendorId=" + vendorId + ", tendorId=" + tendorId + ", bidAmount="
+				+ bidAmount + ", bidderDeadline=" + bidderDeadline + ", status=" + status ;
 	}
 
 }

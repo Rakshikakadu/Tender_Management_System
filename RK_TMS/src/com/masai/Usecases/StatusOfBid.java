@@ -6,12 +6,16 @@ import com.masai.Dao.VendorDao;
 import com.masai.Dao.VendoreDaoImpl;
 
 public class StatusOfBid {
-
+	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_PURPLE_BACKGROUND
+    = "\u001B[45m";
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter your Bidder id: ");
+		System.out.println(ANSI_YELLOW +"Enter your Bidder id: "+ ANSI_RESET);
 		int bid = sc.nextInt();
 		
 		VendorDao vendor = new VendoreDaoImpl();
@@ -19,7 +23,8 @@ public class StatusOfBid {
 		try {
 			
 			String str =  vendor.statusOfBid(bid);
-			System.out.println(str);
+			System.out.println(ANSI_PURPLE_BACKGROUND
+                    +str + ANSI_RESET);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

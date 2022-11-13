@@ -98,8 +98,8 @@ public class Tender {
 
 	@Override
 	public String toString() {
-		return "Tender [tid=" + tid + ", tname=" + tname + ", ttype=" + ttype + ", tprice=" + tprice + ", tdesc="
-				+ tdesc + ", tdeadline=" + tdeadline + ", tloc=" + tloc + "]";
+		return "Tender === tid=" + tid + ", tname=" + tname + ", ttype=" + ttype + ", tprice=" + tprice + ", tdesc="
+				+ tdesc + ", tdeadline=" + tdeadline + ", tloc=" + tloc ;
 	}
 	
 	

@@ -94,8 +94,8 @@ public class Vendor {
 
 	@Override
 	public String toString() {
-		return "Vendor [vid=" + vid + ", password=" + password + ", vname=" + vname + ", vmob=" + vmob + ", vemail="
-				+ vemail + ", company=" + company + ", address=" + address + "]";
+		return "Vendor === vid=" + vid + ", password=" + password + ", vname=" + vname + ", vmob=" + vmob + ", vemail="
+				+ vemail + ", company=" + company + ", address=" + address ;
 	}
 
 }

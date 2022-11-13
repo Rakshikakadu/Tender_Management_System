@@ -12,15 +12,19 @@ public class VendorLogin {
 	
 	private static final String ANSI_RESET = "\u001B[0m";
 	private static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
+	public static final String ANSI_RED = "\u001B[31m";
+	public static final String ANSI_PURPLE_BACKGROUND
+    = "\u001B[45m";
 	
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
 
-		System.out.println("Enter Vendor Username: ");
+		System.out.println(ANSI_YELLOW +"Enter Vendor Username: "+ ANSI_RESET);
 		String vendorUserName = sc.next();
 
-		System.out.println("Enter Vendor Password: ");
+		System.out.println(ANSI_YELLOW +"Enter Vendor Password: "+ ANSI_RESET);
 		String vendorPassword = sc.next();
 
 		try {
@@ -28,6 +32,9 @@ public class VendorLogin {
 			VendorDao vendor = new VendoreDaoImpl();
 
 			Vendor vendor1 = vendor.loginVendor(vendorUserName, vendorPassword);
+			
+			System.out.println(ANSI_RED +"=========== Welcome "+vendorUserName+" ==========="+ ANSI_RESET);
+			
 			System.out.println(vendor1);
 			if (vendor1!=null) {
 				

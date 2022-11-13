@@ -9,15 +9,15 @@ public class AdminLogin {
 	
 	private static final String ANSI_RESET = "\u001B[0m";
 	private static final String ANSI_CYAN = "\u001B[36m";
-	
+	public static final String ANSI_YELLOW = "\u001B[33m";
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enter Admin Username: ");
+		System.out.println(ANSI_YELLOW +"Enter Admin Username: " + ANSI_RESET);
 		String adminUserName = sc.next();
 		
-		System.out.println("Enter Addmin Password: ");
+		System.out.println(ANSI_YELLOW +"Enter Addmin Password: " + ANSI_RESET);
 		String adminPassword = sc.next();
 		
 		try {

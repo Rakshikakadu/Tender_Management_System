@@ -53,8 +53,8 @@ public class Administrator {
 
 	@Override
 	public String toString() {
-		return "Administrator [adminId=" + adminId + ", adminUserName=" + adminUserName + ", adminEmail=" + adminEmail
-				+ ", adminPassword=" + adminPassword + "]";
+		return "Administrator === adminId=" + adminId + ", adminUserName=" + adminUserName + ", adminEmail=" + adminEmail
+				+ ", adminPassword=" + adminPassword ;
 	}
 	
 	

@@ -25,7 +25,7 @@ mysql> desc vendor;
 | vendorCompany  | varchar(15)  | YES  |     | NULL    |                |
 | vendorAddress  | varchar(100) | YES  |     | NULL    |                |
 +----------------+--------------+------+-----+---------+----------------+
-7 rows in set (0.01 sec)
+7 rows in set (0.04 sec)
 
 mysql> create table tender(tendorId int primary key auto_increment,tendorName varchar(40),tendorType varchar(20),
     tendorPrice int, tendorDesc varchar(300),tendorDeadline varchar(10),tendorLocation varchar(70),status varchar(10) default 'Not_Assigned');
@@ -45,6 +45,7 @@ mysql> desc tender;
 | tendorLocation | varchar(70)  | YES  |     | NULL         |                |
 | status         | varchar(30)  | YES  |     | Not_Assigned |                |
 +----------------+--------------+------+-----+--------------+----------------+
+8 rows in set (0.00 sec)
 
 mysql> create table bidder (bidderId int primary key auto_increment,vendorId int references vendor(vendorId),
     -> tendorId int references tendor(tendorId),bidamount int,Bidderdeadline date,status varchar(20) default 'Pending');
