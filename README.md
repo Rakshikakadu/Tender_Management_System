@@ -1,7 +1,6 @@
 # (Rakshika Kadu)
 # Tender Management System
 <p align="center">
-
   <img src="https://user-images.githubusercontent.com/105484277/210182201-8d321405-f723-46b2-93cd-b0f160933124.png" alt="RKTMS" />
 </p>
 # Problem Description:
