@@ -8,9 +8,14 @@
 
 <p>It is a console based java backend application. In this project I have added two main module administrator and vendor where user can perform many operations like signup,login,searching,updating and adding new data.</p>
 
+
+# <b> ER-Diagram:</b>
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/105484277/210182456-df6bc217-089a-4154-8954-d54adcf9ac3c.PNG" alt="RKTMS" />
 </p>
+
+# <b> Flowchart:</b>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/105484277/210182458-b4aa24de-5b05-4b3d-b829-2d230e4557b9.PNG" alt="RKTMS" />
